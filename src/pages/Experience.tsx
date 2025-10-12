@@ -1,103 +1,112 @@
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, CheckCircle } from "lucide-react";
+
+interface Task {
+  title: string;
+  description: string;
+  options?: string[];
+  correctAnswer?: number;
+  type?: "quiz" | "code";
+  codeChallenge?: {
+    instruction: string;
+    starterCode: string;
+    solution: string;
+    hint: string;
+  };
+}
 
 interface ExperienceContent {
   title: string;
   icon: string;
   intro: string;
-  tasks: {
-    title: string;
-    description: string;
-    options: string[];
-    correctAnswer: number;
-  }[];
+  tasks: Task[];
 }
 
 const experienceData: Record<string, ExperienceContent> = {
   "1": {
     title: "IT & 개발",
     icon: "💻",
-    intro: "실제 개발자처럼 문제를 해결하고 앱을 만들어보는 과정을 체험해보세요!",
+    intro: "코딩을 처음부터 배우며 직접 코드를 작성하고 실행하는 경험을 해보세요!",
     tasks: [
       {
-        title: "프로젝트 시작: 할 일 앱 기획",
-        description: "고객이 간단한 할 일 관리 앱을 요청했습니다. 가장 먼저 해야 할 일은?",
-        options: [
-          "바로 코딩 시작하기",
-          "필요한 기능 목록 작성하고 우선순위 정하기",
-          "디자인만 먼저 완성하기",
-          "데이터베이스부터 만들기",
-        ],
-        correctAnswer: 1,
+        type: "code",
+        title: "첫 코드 작성하기",
+        description: "프로그래밍의 시작! 화면에 '안녕하세요!'를 출력하는 코드를 작성해보세요.",
+        codeChallenge: {
+          instruction: "console.log() 함수를 사용해서 '안녕하세요!'를 출력하세요.",
+          starterCode: "// 여기에 코드를 작성하세요\n",
+          solution: "console.log('안녕하세요!')",
+          hint: "console.log('여기에 텍스트를 입력하세요')",
+        },
       },
       {
-        title: "변수와 데이터 타입",
-        description: "사용자 정보를 저장하려고 합니다. 올바른 코드는?",
-        options: [
-          "let user = { name: '김철수', age: 20, email: 'kim@example.com' }",
-          "var user = name, age, email",
-          "const user = '김철수', 20, 'kim@example.com'",
-          "user = ['김철수' + 20 + 'kim@example.com']",
-        ],
-        correctAnswer: 0,
+        type: "code",
+        title: "변수 사용하기",
+        description: "변수는 데이터를 저장하는 상자입니다. 내 이름을 저장하고 출력해볼까요?",
+        codeChallenge: {
+          instruction: "let으로 name 변수를 만들고 당신의 이름을 저장한 뒤, console.log로 출력하세요.",
+          starterCode: "// let name = '당신의 이름'\n// console.log(name)\n",
+          solution: "let name = '철수'\nconsole.log(name)",
+          hint: "let name = '여기에 이름'; 그 다음 console.log(name)",
+        },
       },
       {
-        title: "조건문으로 로직 구현",
-        description: "로그인 시 비밀번호가 일치하면 '로그인 성공', 아니면 '비밀번호 오류'를 표시하려면?",
-        options: [
-          "if password == correct { success } else { error }",
-          "if (password === correctPassword) { alert('로그인 성공') } else { alert('비밀번호 오류') }",
-          "when password = correct show success",
-          "password === correct ? login : error",
-        ],
-        correctAnswer: 1,
+        type: "code",
+        title: "숫자 계산하기",
+        description: "프로그래밍으로 계산을 해봅시다. 두 숫자를 더하고 결과를 출력해보세요.",
+        codeChallenge: {
+          instruction: "10과 20을 더한 결과를 result 변수에 저장하고 출력하세요.",
+          starterCode: "// let result = \n",
+          solution: "let result = 10 + 20\nconsole.log(result)",
+          hint: "let result = 10 + 20; 그리고 console.log(result)",
+        },
       },
       {
-        title: "반복문 활용",
-        description: "할 일 목록의 모든 항목을 화면에 표시하려면 어떤 방법이 가장 적합할까요?",
-        options: [
-          "각 항목을 하나씩 직접 쓰기",
-          "배열.map()을 사용해서 각 항목을 컴포넌트로 변환",
-          "if문으로 하나씩 확인",
-          "항목 개수만큼 코드 복사하기",
-        ],
-        correctAnswer: 1,
+        type: "code",
+        title: "조건문: 성인 판별",
+        description: "나이에 따라 다른 메시지를 보여주는 프로그램을 만들어봅시다.",
+        codeChallenge: {
+          instruction: "age 변수가 18 이상이면 '성인입니다', 아니면 '미성년자입니다'를 출력하세요.",
+          starterCode: "let age = 20\n// if문을 사용해보세요\n",
+          solution: "let age = 20\nif (age >= 18) {\n  console.log('성인입니다')\n} else {\n  console.log('미성년자입니다')\n}",
+          hint: "if (age >= 18) { console.log('성인입니다') } else { console.log('미성년자입니다') }",
+        },
       },
       {
-        title: "버그 수정하기",
-        description: "앱이 느려진다는 사용자 피드백이 왔습니다. 가장 먼저 할 일은?",
-        options: [
-          "전체 코드 다시 작성",
-          "성능 측정 도구로 병목 지점 찾기",
-          "서버만 업그레이드하기",
-          "사용자에게 기다리라고 하기",
-        ],
-        correctAnswer: 1,
+        type: "code",
+        title: "함수 만들기",
+        description: "같은 코드를 반복하지 않고 재사용할 수 있는 함수를 만들어봅시다.",
+        codeChallenge: {
+          instruction: "이름을 받아서 '안녕하세요, [이름]님!'을 출력하는 greet 함수를 만들고 실행하세요.",
+          starterCode: "// function greet(name) {\n//   \n// }\n// greet('철수')\n",
+          solution: "function greet(name) {\n  console.log('안녕하세요, ' + name + '님!')\n}\ngreet('철수')",
+          hint: "function greet(name) { console.log('안녕하세요, ' + name + '님!') }",
+        },
       },
       {
-        title: "팀 협업",
-        description: "다른 개발자가 작성한 코드를 수정해야 합니다. 가장 좋은 방법은?",
-        options: [
-          "코드 전체를 내 스타일로 다시 작성",
-          "원작성자에게 코드 설명 듣고 필요한 부분만 수정",
-          "아무것도 건드리지 않기",
-          "주석 없이 바로 수정",
-        ],
-        correctAnswer: 1,
+        type: "code",
+        title: "배열 다루기",
+        description: "여러 데이터를 한 번에 저장하고 관리하는 배열을 배워봅시다.",
+        codeChallenge: {
+          instruction: "과일 배열을 만들고 첫 번째 과일을 출력하세요. (사과, 바나나, 오렌지)",
+          starterCode: "// let fruits = ['사과', '바나나', '오렌지']\n",
+          solution: "let fruits = ['사과', '바나나', '오렌지']\nconsole.log(fruits[0])",
+          hint: "배열의 첫 번째 요소는 fruits[0]으로 접근합니다",
+        },
       },
       {
-        title: "배포 준비",
-        description: "앱을 사용자에게 공개하기 전에 반드시 해야 할 일은?",
-        options: [
-          "바로 배포하기",
-          "테스트 실행, 보안 검토, 백업 준비",
-          "디자인만 다시 확인",
-          "친구에게만 먼저 보여주기",
-        ],
-        correctAnswer: 1,
+        type: "code",
+        title: "반복문: 모든 항목 출력",
+        description: "배열의 모든 항목을 하나씩 출력하는 반복문을 배워봅시다.",
+        codeChallenge: {
+          instruction: "for문을 사용해서 numbers 배열의 모든 숫자를 출력하세요.",
+          starterCode: "let numbers = [1, 2, 3, 4, 5]\n// for문 작성\n",
+          solution: "let numbers = [1, 2, 3, 4, 5]\nfor (let i = 0; i < numbers.length; i++) {\n  console.log(numbers[i])\n}",
+          hint: "for (let i = 0; i < numbers.length; i++) { console.log(numbers[i]) }",
+        },
       },
     ],
   },
@@ -529,6 +538,9 @@ export default function Experience() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const [code, setCode] = useState("");
+  const [codeOutput, setCodeOutput] = useState<string[]>([]);
+  const [showHint, setShowHint] = useState(false);
 
   const content = id ? experienceData[id] : null;
 
@@ -548,6 +560,63 @@ export default function Experience() {
   const currentTaskData = content.tasks[currentTask];
   const isLastTask = currentTask === content.tasks.length - 1;
   const allCompleted = currentTask >= content.tasks.length;
+
+  // Initialize code when task changes
+  useEffect(() => {
+    if (currentTaskData?.type === "code" && currentTaskData.codeChallenge) {
+      setCode(currentTaskData.codeChallenge.starterCode);
+      setCodeOutput([]);
+      setShowHint(false);
+      setShowResult(false);
+    }
+  }, [currentTask, currentTaskData]);
+
+  const runCode = () => {
+    const outputs: string[] = [];
+    const originalLog = console.log;
+    
+    // Override console.log to capture output
+    console.log = (...args) => {
+      outputs.push(args.join(" "));
+    };
+    
+    try {
+      // eslint-disable-next-line no-eval
+      eval(code);
+      setCodeOutput(outputs);
+    } catch (error) {
+      if (error instanceof Error) {
+        setCodeOutput([`❌ 오류: ${error.message}`]);
+      }
+    } finally {
+      console.log = originalLog;
+    }
+  };
+
+  const checkCodeSolution = () => {
+    if (!currentTaskData.codeChallenge) return false;
+    
+    // Run the code first
+    runCode();
+    
+    // Simple check: remove whitespace and compare key parts
+    const normalizedCode = code.replace(/\s+/g, "").toLowerCase();
+    const normalizedSolution = currentTaskData.codeChallenge.solution.replace(/\s+/g, "").toLowerCase();
+    
+    // Check if code is similar enough to solution
+    const solutionParts = normalizedSolution.split("\n").filter(line => line.trim() !== "");
+    const matchCount = solutionParts.filter(part => 
+      normalizedCode.includes(part.replace(/['"]/g, ""))
+    ).length;
+    
+    const isCorrect = matchCount >= solutionParts.length * 0.7; // 70% match threshold
+    
+    if (isCorrect) {
+      setCorrectCount(correctCount + 1);
+    }
+    setShowResult(true);
+    return isCorrect;
+  };
 
   const handleAnswerSelect = (index: number) => {
     setSelectedAnswer(index);
@@ -570,6 +639,11 @@ export default function Experience() {
       setCurrentTask(currentTask + 1);
       setSelectedAnswer(null);
       setShowResult(false);
+      setCodeOutput([]);
+      setShowHint(false);
+      if (content.tasks[currentTask + 1]?.type === "code" && content.tasks[currentTask + 1].codeChallenge) {
+        setCode(content.tasks[currentTask + 1].codeChallenge!.starterCode);
+      }
     }
   };
 
@@ -664,63 +738,158 @@ export default function Experience() {
             <p className="text-muted-foreground">{currentTaskData.description}</p>
           </div>
 
-          <div className="space-y-3">
-            {currentTaskData.options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => !showResult && handleAnswerSelect(index)}
-                disabled={showResult}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
-                  showResult
-                    ? index === currentTaskData.correctAnswer
-                      ? "border-green-500 bg-green-50 dark:bg-green-950"
-                      : index === selectedAnswer
-                      ? "border-red-500 bg-red-50 dark:bg-red-950"
-                      : "border-border"
-                    : selectedAnswer === index
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span>{option}</span>
-                  {showResult && index === currentTaskData.correctAnswer && (
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                  )}
+          {currentTaskData.type === "code" && currentTaskData.codeChallenge ? (
+            <div className="space-y-4">
+              <div className="bg-muted/50 p-4 rounded-lg">
+                <p className="text-sm font-medium mb-2">📝 과제:</p>
+                <p className="text-sm">{currentTaskData.codeChallenge.instruction}</p>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium mb-2 block">코드 에디터:</label>
+                <textarea
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  className="w-full h-48 p-4 font-mono text-sm bg-slate-950 text-green-400 rounded-lg border-2 border-border focus:border-primary focus:outline-none"
+                  placeholder="여기에 코드를 작성하세요..."
+                  spellCheck={false}
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <Button onClick={runCode} variant="outline" size="sm">
+                  ▶️ 실행하기
+                </Button>
+                <Button 
+                  onClick={() => setShowHint(!showHint)} 
+                  variant="ghost" 
+                  size="sm"
+                >
+                  💡 힌트 {showHint ? "숨기기" : "보기"}
+                </Button>
+              </div>
+
+              {showHint && (
+                <div className="bg-yellow-50 dark:bg-yellow-950/30 p-4 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                  <p className="text-sm font-medium text-yellow-900 dark:text-yellow-200">
+                    💡 힌트: {currentTaskData.codeChallenge.hint}
+                  </p>
                 </div>
-              </button>
-            ))}
-          </div>
+              )}
 
-          {showResult && (
-            <div className={`p-4 rounded-lg ${
-              selectedAnswer === currentTaskData.correctAnswer
-                ? "bg-green-50 dark:bg-green-950 text-green-900 dark:text-green-100"
-                : "bg-red-50 dark:bg-red-950 text-red-900 dark:text-red-100"
-            }`}>
-              <p className="font-semibold">
-                {selectedAnswer === currentTaskData.correctAnswer
-                  ? "정답입니다! 🎉"
-                  : "아쉽네요! 다음에는 잘할 수 있을 거예요!"}
-              </p>
+              {codeOutput.length > 0 && (
+                <div>
+                  <label className="text-sm font-medium mb-2 block">실행 결과:</label>
+                  <div className="bg-slate-950 p-4 rounded-lg border-2 border-border font-mono text-sm">
+                    {codeOutput.map((output, i) => (
+                      <div key={i} className="text-green-400">
+                        {output}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {showResult && (
+                <div className={`p-4 rounded-lg ${
+                  code && checkCodeSolution()
+                    ? "bg-green-50 dark:bg-green-950 text-green-900 dark:text-green-100"
+                    : "bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-100"
+                }`}>
+                  <p className="font-semibold mb-2">
+                    {code && checkCodeSolution()
+                      ? "정답입니다! 🎉 코딩을 잘 이해하셨네요!"
+                      : "잘 시도했어요! 💪 힌트나 정답을 참고해보세요."}
+                  </p>
+                  <details className="mt-2">
+                    <summary className="cursor-pointer text-sm font-medium">
+                      💡 정답 코드 보기
+                    </summary>
+                    <pre className="mt-2 p-3 bg-slate-900 rounded text-green-400 text-xs overflow-x-auto">
+                      {currentTaskData.codeChallenge.solution}
+                    </pre>
+                  </details>
+                </div>
+              )}
+
+              <div className="flex justify-end gap-3">
+                {!showResult ? (
+                  <Button 
+                    onClick={() => {
+                      checkCodeSolution();
+                    }}
+                    size="lg"
+                  >
+                    제출하기
+                  </Button>
+                ) : (
+                  <Button onClick={handleNext} size="lg">
+                    {isLastTask ? "결과 보기" : "다음 단계"}
+                  </Button>
+                )}
+              </div>
             </div>
-          )}
+          ) : (
+            <>
+              <div className="space-y-3">
+                {currentTaskData.options?.map((option, index) => (
+                  <button
+                    key={index}
+                    onClick={() => !showResult && handleAnswerSelect(index)}
+                    disabled={showResult}
+                    className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
+                      showResult
+                        ? index === currentTaskData.correctAnswer
+                          ? "border-green-500 bg-green-50 dark:bg-green-950"
+                          : index === selectedAnswer
+                          ? "border-red-500 bg-red-50 dark:bg-red-950"
+                          : "border-border"
+                        : selectedAnswer === index
+                        ? "border-primary bg-primary/5"
+                        : "border-border hover:border-primary/50"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span>{option}</span>
+                      {showResult && index === currentTaskData.correctAnswer && (
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
 
-          <div className="flex justify-end gap-3">
-            {!showResult ? (
-              <Button 
-                onClick={handleSubmit}
-                disabled={selectedAnswer === null}
-                size="lg"
-              >
-                제출하기
-              </Button>
-            ) : (
-              <Button onClick={handleNext} size="lg">
-                {isLastTask ? "결과 보기" : "다음 문제"}
-              </Button>
-            )}
-          </div>
+              {showResult && (
+                <div className={`p-4 rounded-lg ${
+                  selectedAnswer === currentTaskData.correctAnswer
+                    ? "bg-green-50 dark:bg-green-950 text-green-900 dark:text-green-100"
+                    : "bg-red-50 dark:bg-red-950 text-red-900 dark:text-red-100"
+                }`}>
+                  <p className="font-semibold">
+                    {selectedAnswer === currentTaskData.correctAnswer
+                      ? "정답입니다! 🎉"
+                      : "아쉽네요! 다음에는 잘할 수 있을 거예요!"}
+                  </p>
+                </div>
+              )}
+
+              <div className="flex justify-end gap-3">
+                {!showResult ? (
+                  <Button 
+                    onClick={handleSubmit}
+                    disabled={selectedAnswer === null}
+                    size="lg"
+                  >
+                    제출하기
+                  </Button>
+                ) : (
+                  <Button onClick={handleNext} size="lg">
+                    {isLastTask ? "결과 보기" : "다음 문제"}
+                  </Button>
+                )}
+              </div>
+            </>
+          )}
         </Card>
       </div>
     </div>
