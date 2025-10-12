@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.6e82ffc4f89645f089623657c121ace4',
+  appId: 'app.lovable.findmypathkr',
   appName: 'find-my-path-kr',
   webDir: 'dist',
   server: {
