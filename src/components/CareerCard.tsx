@@ -32,7 +32,7 @@ export function CareerCard({ id, title, description, image, icon, gradient }: Ca
         
         {/* Content */}
         <div className="p-4">
-          <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+          <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors mb-2">
             {title}
           </h3>
           
