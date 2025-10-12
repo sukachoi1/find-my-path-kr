@@ -59,22 +59,22 @@ const careers = [
 
 export function ExploreSection() {
   return (
-    <div className="py-20 px-4 bg-gradient-to-b from-background to-muted/30">
-      <div className="container mx-auto">
+    <div className="py-12 px-4 bg-gradient-to-b from-background to-muted/30">
+      <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3">
             <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] bg-clip-text text-transparent">
-              다양한 분야를 탐험하세요
+              진로 분야 선택하기
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            각 분야의 실제 업무를 체험하고, 나에게 맞는 진로를 찾아보세요
+          <p className="text-base text-muted-foreground">
+            관심있는 분야를 클릭해서 체험을 시작하세요
           </p>
         </div>
         
         {/* Career Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {careers.map((career) => (
             <CareerCard
               key={career.id}
