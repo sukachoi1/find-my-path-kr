@@ -32,6 +32,12 @@ export function Hero() {
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4 animate-in fade-in duration-700">
+          <Sparkles className="w-4 h-4 text-primary" />
+          <span className="text-sm font-medium">한국 학생들을 위한 진로 탐험</span>
+        </div>
+
         <h1 className="text-5xl md:text-6xl font-black mb-4 relative tracking-tight">
           <span className="absolute inset-0 blur-3xl bg-gradient-to-r from-primary/50 via-secondary/50 to-accent/50 opacity-40 animate-pulse"></span>
           <span className="relative inline-block">
@@ -47,16 +53,60 @@ export function Hero() {
           <span className="text-foreground font-semibold"> 나만의 재능과 열정을 발견하세요</span>
         </p>
         
-        <Link to="/auth">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <Link to="/auth">
+            <Button 
+              size="lg" 
+              variant="hero"
+              className="group hover-scale shadow-lg"
+            >
+              지금 시작하기
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            </Button>
+          </Link>
+          
           <Button 
             size="lg" 
-            variant="hero"
-            className="group hover-scale shadow-lg"
+            variant="outline"
+            className="border-2 hover-scale"
+            onClick={scrollToAbout}
           >
-            지금 시작하기
-            <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            더 알아보기
           </Button>
-        </Link>
+        </div>
+        
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div className="space-y-2 p-4 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 backdrop-blur-sm hover-scale transition-all">
+            <div className="flex justify-center">
+              <div className="p-2 rounded-full bg-primary/10">
+                <Sparkles className="w-5 h-5 text-primary" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] bg-clip-text text-transparent">6개 분야</div>
+            <div className="text-xs text-muted-foreground">다양한 직업 체험</div>
+          </div>
+          
+          <div className="space-y-2 p-4 rounded-2xl bg-gradient-to-br from-secondary/5 to-secondary/10 backdrop-blur-sm hover-scale transition-all">
+            <div className="flex justify-center">
+              <div className="p-2 rounded-full bg-secondary/10">
+                <TrendingUp className="w-5 h-5 text-secondary" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-[hsl(var(--secondary))] to-[hsl(var(--secondary-glow))] bg-clip-text text-transparent">42개 과제</div>
+            <div className="text-xs text-muted-foreground">실전 문제 해결</div>
+          </div>
+          
+          <div className="space-y-2 p-4 rounded-2xl bg-gradient-to-br from-accent/5 to-accent/10 backdrop-blur-sm hover-scale transition-all">
+            <div className="flex justify-center">
+              <div className="p-2 rounded-full bg-accent/10">
+                <Users className="w-5 h-5 text-accent" />
+              </div>
+            </div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-[hsl(var(--accent))] to-[hsl(200_90%_65%)] bg-clip-text text-transparent">무료</div>
+            <div className="text-xs text-muted-foreground">누구나 참여 가능</div>
+          </div>
+        </div>
       </div>
     </div>
   );
