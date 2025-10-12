@@ -126,6 +126,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "클라이언트 미팅",
         description: "카페 주인이 '예쁜 앱'을 만들어달라고 합니다. 가장 먼저 물어봐야 할 것은?",
+        videoUrl: "https://www.youtube.com/embed/FtUSiXLxKrw",
         options: [
           "좋아하는 색상이 뭔가요?",
           "타겟 고객은 누구이고, 어떤 기능이 필요한가요?",
@@ -137,6 +138,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "사용자 조사",
         description: "20대를 위한 운동 앱을 디자인합니다. 무엇을 먼저 조사해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/Ovj4hFxko7c",
         options: [
           "경쟁 앱만 분석",
           "20대의 운동 습관, 선호도, 불편한 점 인터뷰",
@@ -148,6 +150,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "색상 심리학",
         description: "건강식품 브랜드의 색상을 선택합니다. 가장 적합한 색은?",
+        videoUrl: "https://www.youtube.com/embed/KMS3VwGh3HY",
         options: [
           "빨강 (활력, 흥분)",
           "초록 (자연, 건강, 신선함)",
@@ -159,6 +162,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "UI 레이아웃 설계",
         description: "뉴스 앱의 첫 화면에서 가장 중요한 것은?",
+        videoUrl: "https://www.youtube.com/embed/YiLUYf4HDh4",
         options: [
           "광고를 가장 크게",
           "주요 뉴스를 쉽게 찾을 수 있는 구조",
@@ -170,6 +174,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "타이포그래피",
         description: "어린이 교육 앱의 글꼴 선택에서 가장 중요한 것은?",
+        videoUrl: "https://www.youtube.com/embed/sByzHoiYFX0",
         options: [
           "멋진 장식 글꼴",
           "읽기 쉽고 친근한 글꼴, 적절한 크기",
@@ -181,6 +186,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "사용자 피드백 반영",
         description: "베타 테스터들이 '버튼을 찾기 어렵다'고 합니다. 어떻게 해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/w2A8SknM-68",
         options: [
           "디자인은 그대로 두고 설명서 추가",
           "버튼 크기, 색상, 위치를 개선하고 재테스트",
@@ -192,6 +198,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "접근성 고려",
         description: "모든 사용자가 쓸 수 있는 디자인을 위해 필수적인 것은?",
+        videoUrl: "https://www.youtube.com/embed/3f31oufqFSM",
         options: [
           "예쁜 색상만 중요",
           "색약자 고려, 충분한 대비, 큰 터치 영역",
@@ -210,6 +217,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "아침 회진",
         description: "입원 환자가 '밤새 열이 났어요'라고 합니다. 첫 번째 조치는?",
+        videoUrl: "https://www.youtube.com/embed/8HslUzw35mc",
         options: [
           "즉시 해열제 투여",
           "체온 측정, 활력징후 확인, 증상 발생 시간 파악",
@@ -221,6 +229,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "응급실: 우선순위 판단",
         description: "동시에 3명의 환자가 왔습니다. 누구를 먼저 봐야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/oCpS5RuF7_g",
         options: [
           "먼저 온 순서대로",
           "가슴 통증과 호흡곤란을 호소하는 환자",
@@ -232,6 +241,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "진단: 증상 분석",
         description: "두통, 발열, 목 뻐근함을 호소하는 환자. 의심되는 질환은?",
+        videoUrl: "https://www.youtube.com/embed/lUjIgYbsXbk",
         options: [
           "단순 감기",
           "뇌수막염 가능성 - 추가 검사 필요",
@@ -243,6 +253,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "처방 결정",
         description: "고혈압 환자가 약을 먹으면 어지럽다고 합니다. 어떻게 해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/Js1ShZGqyZk",
         options: [
           "약을 끊으라고 하기",
           "부작용 확인, 용량 조절 또는 약 변경 고려",
@@ -254,6 +265,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "환자 상담",
         description: "당뇨 진단받은 환자가 불안해합니다. 가장 중요한 말은?",
+        videoUrl: "https://www.youtube.com/embed/wZAjVQWbMlE",
         options: [
           "무섭지 않다고 거짓말하기",
           "관리 방법 설명하고, 잘 관리하면 정상 생활 가능하다고 안심시키기",
@@ -265,6 +277,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "감염 관리",
         description: "독감이 유행하는 시기, 병원에서 가장 중요한 것은?",
+        videoUrl: "https://www.youtube.com/embed/qFbM-PI0VyE",
         options: [
           "환자 받지 않기",
           "손 씻기, 마스크 착용, 환자 격리",
@@ -276,6 +289,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "의료 윤리",
         description: "환자 정보를 친구가 궁금해합니다. 어떻게 해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/Rr4HDQvcZAo",
         options: [
           "친구니까 알려주기",
           "환자 동의 없이는 절대 정보 공개 안 함",
@@ -294,6 +308,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "시장 조사",
         description: "새로운 배달 앱 사업을 시작하려고 합니다. 가장 먼저 할 일은?",
+        videoUrl: "https://www.youtube.com/embed/2Y8rJafZkQg",
         options: [
           "바로 개발 시작",
           "시장 규모, 경쟁사, 고객 니즈 분석",
@@ -305,6 +320,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "비즈니스 모델",
         description: "무료 앱으로 어떻게 수익을 낼 수 있을까요?",
+        videoUrl: "https://www.youtube.com/embed/PTfTJoYkrRU",
         options: [
           "수익 없이 운영",
           "광고, 프리미엄 기능, 수수료 등 다양한 수익 모델 설계",
@@ -316,6 +332,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "팀 빌딩",
         description: "초기 스타트업에서 가장 먼저 채용해야 할 사람은?",
+        videoUrl: "https://www.youtube.com/embed/W608u6sBFpo",
         options: [
           "유명한 사람 아무나",
           "회사 비전에 공감하고 다양한 역할을 할 수 있는 인재",
@@ -327,6 +344,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "예산 관리",
         description: "매출은 있지만 적자가 계속됩니다. 어떻게 해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/BxPHWl1-cVA",
         options: [
           "더 큰 투자 받기만 하기",
           "비용 구조 분석하고 불필요한 지출 줄이기",
@@ -338,6 +356,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "마케팅 전략",
         description: "예산 1000만원으로 최대 효과를 내려면?",
+        videoUrl: "https://www.youtube.com/embed/YPy-FBCqgZA",
         options: [
           "TV 광고 한 번",
           "타겟 고객이 있는 채널에 집중 투자 (SNS, 인플루언서)",
@@ -349,6 +368,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "고객 피드백",
         description: "출시한 제품에 부정적 리뷰가 많습니다. 어떻게 대응할까요?",
+        videoUrl: "https://www.youtube.com/embed/Q5u9Kd_22rE",
         options: [
           "리뷰 삭제 요청",
           "문제점 파악, 개선 계획 발표, 고객과 소통",
@@ -360,6 +380,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "성장 전략",
         description: "사업이 안정화되었습니다. 다음 단계는?",
+        videoUrl: "https://www.youtube.com/embed/kBdfAVqL47s",
         options: [
           "아무것도 안 하기",
           "시장 확대, 신규 서비스, 파트너십 등 성장 전략 수립",
@@ -378,6 +399,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "작품 기획",
         description: "청소년을 위한 뮤지컬을 만들려고 합니다. 가장 먼저 할 일은?",
+        videoUrl: "https://www.youtube.com/embed/o8Dq5VbazWU",
         options: [
           "유명한 작품 베끼기",
           "청소년의 고민과 관심사 조사, 메시지 결정",
@@ -389,6 +411,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "대본 작성",
         description: "스토리가 지루하다는 피드백을 받았습니다. 개선 방법은?",
+        videoUrl: "https://www.youtube.com/embed/fJVkjdJqMuA",
         options: [
           "무시하고 진행",
           "갈등 구조 강화, 캐릭터 매력 향상, 반전 추가",
@@ -400,6 +423,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "음악 작곡",
         description: "슬픈 이별 장면의 노래를 만듭니다. 어떤 요소가 중요할까요?",
+        videoUrl: "https://www.youtube.com/embed/JU8-XWRd6GQ",
         options: [
           "빠른 템포, 신나는 멜로디",
           "느린 템포, 단조, 감성적인 가사",
@@ -411,6 +435,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "캐스팅",
         description: "주인공 역할의 배우를 선택합니다. 가장 중요한 기준은?",
+        videoUrl: "https://www.youtube.com/embed/YAh4KW2TghE",
         options: [
           "인기만 많으면 됨",
           "연기력, 캐릭터 이해도, 팀워크",
@@ -422,6 +447,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "무대 디자인",
         description: "작은 극장에서 큰 스케일의 이야기를 보여주려면?",
+        videoUrl: "https://www.youtube.com/embed/OqKLc5Nl30I",
         options: [
           "포기하기",
           "조명, 영상, 상징적 소품으로 창의적 표현",
@@ -433,6 +459,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "리허설",
         description: "배우들의 호흡이 맞지 않습니다. 연출가로서 어떻게 할까요?",
+        videoUrl: "https://www.youtube.com/embed/XcLPY-lMsvs",
         options: [
           "배우들을 혼내기",
           "팀 빌딩 활동, 연기 워크숍, 소통 강화",
@@ -444,6 +471,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "공연 당일",
         description: "공연 중 소품이 망가졌습니다! 무대 위에서 어떻게 해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/wF7qw6TSP7g",
         options: [
           "공연 중단",
           "즉흥적으로 상황 넘기고 계속 진행",
@@ -462,6 +490,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "연구 주제 선정",
         description: "암 치료제 연구를 시작합니다. 가장 먼저 할 일은?",
+        videoUrl: "https://www.youtube.com/embed/FKIp7lI_m6U",
         options: [
           "바로 실험 시작",
           "기존 연구 논문 검토, 연구 가설 수립",
@@ -473,6 +502,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "실험 설계",
         description: "신약 후보 물질의 효과를 테스트합니다. 올바른 실험 설계는?",
+        videoUrl: "https://www.youtube.com/embed/HeQX2HjkcNo",
         options: [
           "한 번만 실험하기",
           "대조군 설정, 변수 통제, 충분한 반복 실험",
@@ -484,6 +514,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "데이터 수집",
         description: "실험 중 예상치 못한 결과가 나왔습니다. 어떻게 해야 할까요?",
+        videoUrl: "https://www.youtube.com/embed/Zp-BD4fmKP4",
         options: [
           "결과 버리기",
           "정확히 기록하고 원인 분석, 새로운 발견 가능성 탐색",
@@ -495,6 +526,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "데이터 분석",
         description: "수집한 데이터를 분석할 때 가장 중요한 것은?",
+        videoUrl: "https://www.youtube.com/embed/XXfh7eKaB38",
         options: [
           "내 가설에 맞게 해석",
           "통계적 유의성 확인, 객관적 분석",
@@ -506,6 +538,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "실험 실패",
         description: "6개월 실험이 실패했습니다. 연구자의 올바른 태도는?",
+        videoUrl: "https://www.youtube.com/embed/zLYECIjmnQs",
         options: [
           "연구 포기",
           "실패 원인 분석, 새로운 가설 수립, 재도전",
@@ -517,6 +550,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "논문 작성",
         description: "연구 결과를 논문으로 발표합니다. 가장 중요한 것은?",
+        videoUrl: "https://www.youtube.com/embed/g3dkRsTqdDA",
         options: [
           "과장해서 쓰기",
           "정직하고 정확한 기록, 한계점도 명시",
@@ -528,6 +562,7 @@ const experienceData: Record<string, ExperienceContent> = {
       {
         title: "동료 평가",
         description: "동료 과학자가 내 논문에 문제를 제기했습니다. 어떻게 할까요?",
+        videoUrl: "https://www.youtube.com/embed/Ih0TiJQwhVs",
         options: [
           "화내기",
           "피드백 수용, 재검증, 토론을 통한 발전",
@@ -859,6 +894,25 @@ export default function Experience() {
             </div>
           ) : (
             <>
+              {currentTaskData.videoUrl && (
+                <div className="rounded-lg overflow-hidden border-2 border-border mb-6">
+                  <div className="aspect-video">
+                    <iframe
+                      src={currentTaskData.videoUrl}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="학습 영상"
+                    />
+                  </div>
+                  <div className="bg-muted/50 p-3 border-t border-border">
+                    <p className="text-xs text-muted-foreground">
+                      📺 영상을 보고 개념을 이해한 다음 아래 문제를 풀어보세요!
+                    </p>
+                  </div>
+                </div>
+              )}
+
               <div className="space-y-3">
                 {currentTaskData.options?.map((option, index) => (
                   <button
