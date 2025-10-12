@@ -32,8 +32,14 @@ export function Hero() {
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] bg-clip-text text-transparent">
-          꿈을 찾는 여정
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 relative">
+          <span className="absolute inset-0 blur-2xl bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] opacity-30"></span>
+          <span className="relative bg-gradient-to-r from-[hsl(var(--primary))] via-[hsl(var(--secondary))] to-[hsl(var(--primary-glow))] bg-clip-text text-transparent drop-shadow-2xl animate-[fade-in_1s_ease-out]" style={{
+            textShadow: '0 0 40px rgba(139, 92, 246, 0.3)',
+            WebkitTextStroke: '1px rgba(139, 92, 246, 0.1)'
+          }}>
+            ✨ 꿈을 찾는 여정 ✨
+          </span>
         </h1>
         
         <p className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
