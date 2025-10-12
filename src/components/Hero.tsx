@@ -32,7 +32,7 @@ export function Hero() {
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <h1 className="text-5xl md:text-6xl font-black mb-4 relative tracking-tight transform hover:scale-105 transition-transform duration-300" style={{ fontStyle: 'italic', transform: 'skewY(-2deg)' }}>
+        <h1 className="text-5xl md:text-6xl font-black mb-4 relative tracking-tight">
           <span className="absolute inset-0 blur-3xl bg-gradient-to-r from-primary/50 via-secondary/50 to-accent/50 opacity-40 animate-pulse"></span>
           <span className="relative inline-block">
             <span className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%] animate-[gradient_3s_ease-in-out_infinite] bg-clip-text text-transparent blur-sm opacity-70"></span>
