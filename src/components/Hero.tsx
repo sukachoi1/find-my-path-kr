@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-students.jpg";
 
 export function Hero() {
@@ -29,14 +30,16 @@ export function Hero() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in slide-in-from-bottom-4 duration-700 delay-200">
-          <Button 
-            size="lg" 
-            variant="hero"
-            className="group"
-          >
-            지금 시작하기
-            <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-          </Button>
+          <Link to="/auth">
+            <Button 
+              size="lg" 
+              variant="hero"
+              className="group"
+            >
+              지금 시작하기
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            </Button>
+          </Link>
           
           <Button 
             size="lg" 
