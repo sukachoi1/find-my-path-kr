@@ -541,6 +541,7 @@ export default function Experience() {
   const [code, setCode] = useState("");
   const [codeOutput, setCodeOutput] = useState<string[]>([]);
   const [showHint, setShowHint] = useState(false);
+  const [isCodeCorrect, setIsCodeCorrect] = useState(false);
 
   const content = id ? experienceData[id] : null;
 
@@ -568,6 +569,7 @@ export default function Experience() {
       setCodeOutput([]);
       setShowHint(false);
       setShowResult(false);
+      setIsCodeCorrect(false);
     }
   }, [currentTask, currentTaskData]);
 
@@ -594,7 +596,7 @@ export default function Experience() {
   };
 
   const checkCodeSolution = () => {
-    if (!currentTaskData.codeChallenge) return false;
+    if (!currentTaskData.codeChallenge) return;
     
     // Run the code first
     runCode();
@@ -611,11 +613,11 @@ export default function Experience() {
     
     const isCorrect = matchCount >= solutionParts.length * 0.7; // 70% match threshold
     
+    setIsCodeCorrect(isCorrect);
     if (isCorrect) {
       setCorrectCount(correctCount + 1);
     }
     setShowResult(true);
-    return isCorrect;
   };
 
   const handleAnswerSelect = (index: number) => {
@@ -641,6 +643,7 @@ export default function Experience() {
       setShowResult(false);
       setCodeOutput([]);
       setShowHint(false);
+      setIsCodeCorrect(false);
       if (content.tasks[currentTask + 1]?.type === "code" && content.tasks[currentTask + 1].codeChallenge) {
         setCode(content.tasks[currentTask + 1].codeChallenge!.starterCode);
       }
@@ -792,12 +795,12 @@ export default function Experience() {
 
               {showResult && (
                 <div className={`p-4 rounded-lg ${
-                  code && checkCodeSolution()
+                  isCodeCorrect
                     ? "bg-green-50 dark:bg-green-950 text-green-900 dark:text-green-100"
                     : "bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-100"
                 }`}>
                   <p className="font-semibold mb-2">
-                    {code && checkCodeSolution()
+                    {isCodeCorrect
                       ? "정답입니다! 🎉 코딩을 잘 이해하셨네요!"
                       : "잘 시도했어요! 💪 힌트나 정답을 참고해보세요."}
                   </p>
@@ -815,9 +818,7 @@ export default function Experience() {
               <div className="flex justify-end gap-3">
                 {!showResult ? (
                   <Button 
-                    onClick={() => {
-                      checkCodeSolution();
-                    }}
+                    onClick={checkCodeSolution}
                     size="lg"
                   >
                     제출하기
