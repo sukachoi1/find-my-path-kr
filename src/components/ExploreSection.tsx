@@ -78,6 +78,7 @@ export function ExploreSection() {
           {careers.map((career) => (
             <CareerCard
               key={career.id}
+              id={career.id}
               title={career.title}
               description={career.description}
               image={career.image}

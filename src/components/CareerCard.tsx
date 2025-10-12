@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface CareerCardProps {
+  id: number;
   title: string;
   description: string;
   image: string;
@@ -9,7 +11,7 @@ interface CareerCardProps {
   gradient: string;
 }
 
-export function CareerCard({ title, description, image, icon, gradient }: CareerCardProps) {
+export function CareerCard({ id, title, description, image, icon, gradient }: CareerCardProps) {
   return (
     <Card className="group relative overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-[var(--shadow-lg)] hover:-translate-y-2 bg-card">
       {/* Image */}
@@ -37,13 +39,15 @@ export function CareerCard({ title, description, image, icon, gradient }: Career
           {description}
         </p>
         
-        <Button 
-          variant="ghost" 
-          className="w-full group/button hover:bg-primary/10"
-        >
-          <span className="group-hover/button:text-primary transition-colors">체험하기</span>
-          <span className="ml-2 group-hover/button:translate-x-1 transition-transform">→</span>
-        </Button>
+        <Link to={`/experience/${id}`} className="block">
+          <Button 
+            variant="ghost" 
+            className="w-full group/button hover:bg-primary/10"
+          >
+            <span className="group-hover/button:text-primary transition-colors">체험하기</span>
+            <span className="ml-2 group-hover/button:translate-x-1 transition-transform">→</span>
+          </Button>
+        </Link>
       </div>
     </Card>
   );
