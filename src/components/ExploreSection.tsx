@@ -59,16 +59,16 @@ const careers = [
 
 export function ExploreSection() {
   return (
-    <div className="py-12 px-4 bg-gradient-to-b from-background to-muted/30">
+    <div className="py-8 px-4 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">
             <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] bg-clip-text text-transparent">
               진로 분야 선택하기
             </span>
           </h2>
-          <p className="text-base text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             관심있는 분야를 클릭해서 체험을 시작하세요
           </p>
         </div>
