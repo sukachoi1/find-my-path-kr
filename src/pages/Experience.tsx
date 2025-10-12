@@ -10,6 +10,7 @@ interface Task {
   options?: string[];
   correctAnswer?: number;
   type?: "quiz" | "code";
+  videoUrl?: string;
   codeChallenge?: {
     instruction: string;
     starterCode: string;
@@ -35,6 +36,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "첫 코드 작성하기",
         description: "프로그래밍의 시작! 화면에 '안녕하세요!'를 출력하는 코드를 작성해보세요.",
+        videoUrl: "https://www.youtube.com/embed/KF6t61yuPeY",
         codeChallenge: {
           instruction: "console.log() 함수를 사용해서 '안녕하세요!'를 출력하세요.",
           starterCode: "// 여기에 코드를 작성하세요\n",
@@ -46,6 +48,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "변수 사용하기",
         description: "변수는 데이터를 저장하는 상자입니다. 내 이름을 저장하고 출력해볼까요?",
+        videoUrl: "https://www.youtube.com/embed/OCCpGh4ujb8",
         codeChallenge: {
           instruction: "let으로 name 변수를 만들고 당신의 이름을 저장한 뒤, console.log로 출력하세요.",
           starterCode: "// let name = '당신의 이름'\n// console.log(name)\n",
@@ -57,6 +60,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "숫자 계산하기",
         description: "프로그래밍으로 계산을 해봅시다. 두 숫자를 더하고 결과를 출력해보세요.",
+        videoUrl: "https://www.youtube.com/embed/37vZu0JTc8g",
         codeChallenge: {
           instruction: "10과 20을 더한 결과를 result 변수에 저장하고 출력하세요.",
           starterCode: "// let result = \n",
@@ -68,6 +72,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "조건문: 성인 판별",
         description: "나이에 따라 다른 메시지를 보여주는 프로그램을 만들어봅시다.",
+        videoUrl: "https://www.youtube.com/embed/IsG4Xd6LlsM",
         codeChallenge: {
           instruction: "age 변수가 18 이상이면 '성인입니다', 아니면 '미성년자입니다'를 출력하세요.",
           starterCode: "let age = 20\n// if문을 사용해보세요\n",
@@ -79,6 +84,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "함수 만들기",
         description: "같은 코드를 반복하지 않고 재사용할 수 있는 함수를 만들어봅시다.",
+        videoUrl: "https://www.youtube.com/embed/uXrKgUeavh4",
         codeChallenge: {
           instruction: "이름을 받아서 '안녕하세요, [이름]님!'을 출력하는 greet 함수를 만들고 실행하세요.",
           starterCode: "// function greet(name) {\n//   \n// }\n// greet('철수')\n",
@@ -90,6 +96,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "배열 다루기",
         description: "여러 데이터를 한 번에 저장하고 관리하는 배열을 배워봅시다.",
+        videoUrl: "https://www.youtube.com/embed/kNWPo7sGpI4",
         codeChallenge: {
           instruction: "과일 배열을 만들고 첫 번째 과일을 출력하세요. (사과, 바나나, 오렌지)",
           starterCode: "// let fruits = ['사과', '바나나', '오렌지']\n",
@@ -101,6 +108,7 @@ const experienceData: Record<string, ExperienceContent> = {
         type: "code",
         title: "반복문: 모든 항목 출력",
         description: "배열의 모든 항목을 하나씩 출력하는 반복문을 배워봅시다.",
+        videoUrl: "https://www.youtube.com/embed/m4OsJcUgJ1Q",
         codeChallenge: {
           instruction: "for문을 사용해서 numbers 배열의 모든 숫자를 출력하세요.",
           starterCode: "let numbers = [1, 2, 3, 4, 5]\n// for문 작성\n",
@@ -743,6 +751,25 @@ export default function Experience() {
 
           {currentTaskData.type === "code" && currentTaskData.codeChallenge ? (
             <div className="space-y-4">
+              {currentTaskData.videoUrl && (
+                <div className="rounded-lg overflow-hidden border-2 border-border">
+                  <div className="aspect-video">
+                    <iframe
+                      src={currentTaskData.videoUrl}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="코딩 학습 영상"
+                    />
+                  </div>
+                  <div className="bg-muted/50 p-3 border-t border-border">
+                    <p className="text-xs text-muted-foreground">
+                      📺 영상을 보고 개념을 이해한 다음 아래 코드 챌린지를 해결해보세요!
+                    </p>
+                  </div>
+                </div>
+              )}
+
               <div className="bg-muted/50 p-4 rounded-lg">
                 <p className="text-sm font-medium mb-2">📝 과제:</p>
                 <p className="text-sm">{currentTaskData.codeChallenge.instruction}</p>
