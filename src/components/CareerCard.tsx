@@ -20,12 +20,12 @@ export function CareerCard({ id, title, description, image, icon, gradient }: Ca
           <img 
             src={image} 
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 brightness-110 contrast-105 saturate-110"
           />
-          <div className={`absolute inset-0 bg-gradient-to-t ${gradient} to-transparent opacity-60`} />
+          <div className={`absolute inset-0 bg-gradient-to-t ${gradient} to-transparent opacity-20 group-hover:opacity-30 transition-opacity`} />
           
           {/* Icon Badge */}
-          <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center text-lg">
+          <div className="absolute top-2 right-2 w-8 h-8 rounded-full bg-background/95 backdrop-blur-sm flex items-center justify-center text-lg shadow-lg border border-primary/20">
             {icon}
           </div>
         </div>
