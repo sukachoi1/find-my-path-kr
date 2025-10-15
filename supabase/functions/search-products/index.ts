@@ -33,12 +33,12 @@ serve(async (req) => {
     console.log(`Searching for products: ${keyword}, page: ${page}`);
 
     const response = await fetch(
-      `https://aliexpress-unofficial.p.rapidapi.com/api/products/search?keyword=${encodeURIComponent(keyword)}&page=${page}`,
+      `https://aliexpress-api2.p.rapidapi.com/search?SearchText=${encodeURIComponent(keyword)}&page=${page}`,
       {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': RAPIDAPI_KEY,
-          'X-RapidAPI-Host': 'aliexpress-unofficial.p.rapidapi.com'
+          'X-RapidAPI-Host': 'aliexpress-api2.p.rapidapi.com'
         }
       }
     );
@@ -53,10 +53,23 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    console.log('Products fetched successfully:', data.items?.length || 0, 'items');
+    console.log('Products fetched successfully');
+
+    // Transform the response to match the expected format
+    const transformedData = {
+      items: data.body?.products?.map((product: any, index: number) => ({
+        product_id: product.url?.split('/item/')[1]?.split('.html')[0] || `product-${index}`,
+        product_title: product.title || 'No title',
+        product_price: product.price?.current || 'N/A',
+        product_main_image_url: product.image || '',
+        product_url: product.url || '#',
+        product_star_rating: product.customerReview?.average?.toString() || undefined,
+        soldCount: product.soldCount || 0
+      })) || []
+    };
 
     return new Response(
-      JSON.stringify(data),
+      JSON.stringify(transformedData),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 

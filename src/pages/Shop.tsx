@@ -47,7 +47,7 @@ const Shop = () => {
       if (data?.error) {
         toast({
           title: "API 오류",
-          description: "RapidAPI에서 AliExpress Unofficial API를 구독했는지 확인해주세요.",
+          description: "RapidAPI에서 AliExpress API2를 구독했는지 확인해주세요.",
           variant: "destructive",
         });
         return;
@@ -97,7 +97,7 @@ const Shop = () => {
       if (data?.error) {
         toast({
           title: "API 오류",
-          description: "RapidAPI에서 AliExpress Unofficial API를 구독했는지 확인해주세요.",
+          description: "RapidAPI에서 AliExpress API2를 구독했는지 확인해주세요.",
           variant: "destructive",
         });
         return;
