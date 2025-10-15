@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,33 @@ const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+  // 첫 화면 로드 시 베스트 상품 자동 표시
+  useEffect(() => {
+    loadBestProducts();
+  }, []);
+
+  const loadBestProducts = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('search-products', {
+        body: { keyword: "best sellers", page: 1 }
+      });
+
+      if (error) {
+        console.error('Load best products error:', error);
+        return;
+      }
+
+      if (data?.items) {
+        setProducts(data.items);
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const searchProducts = async () => {
     if (!keyword.trim()) {
@@ -113,43 +140,52 @@ const Shop = () => {
 
       {/* Products Grid */}
       <section className="container pb-12">
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <Card key={product.product_id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <a href={product.product_url} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={product.product_main_image_url}
-                    alt={product.product_title}
-                    className="w-full h-64 object-cover"
-                  />
-                  <CardContent className="p-4 space-y-2">
-                    <h3 className="font-semibold line-clamp-2 text-sm">
-                      {product.product_title}
-                    </h3>
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl font-bold text-primary">
-                        ${product.product_price}
-                      </span>
-                      {product.product_original_price && (
-                        <span className="text-sm text-muted-foreground line-through">
-                          ${product.product_original_price}
-                        </span>
-                      )}
-                    </div>
-                    {product.product_star_rating && (
-                      <div className="text-sm text-muted-foreground">
-                        ⭐ {product.product_star_rating}
-                      </div>
-                    )}
-                  </CardContent>
-                </a>
-              </Card>
-            ))}
+        {loading && products.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            베스트 상품을 불러오는 중...
           </div>
+        ) : products.length > 0 ? (
+          <>
+            <h2 className="text-2xl font-bold mb-6">
+              {keyword ? `"${keyword}" 검색 결과` : "베스트 상품"}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {products.map((product) => (
+                <Card key={product.product_id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <a href={product.product_url} target="_blank" rel="noopener noreferrer" className="block">
+                    <img
+                      src={product.product_main_image_url}
+                      alt={product.product_title}
+                      className="w-full h-64 object-cover hover:scale-105 transition-transform"
+                    />
+                    <CardContent className="p-4 space-y-2">
+                      <h3 className="font-semibold line-clamp-2 text-sm">
+                        {product.product_title}
+                      </h3>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl font-bold text-primary">
+                          ${product.product_price}
+                        </span>
+                        {product.product_original_price && (
+                          <span className="text-sm text-muted-foreground line-through">
+                            ${product.product_original_price}
+                          </span>
+                        )}
+                      </div>
+                      {product.product_star_rating && (
+                        <div className="text-sm text-muted-foreground">
+                          ⭐ {product.product_star_rating}
+                        </div>
+                      )}
+                    </CardContent>
+                  </a>
+                </Card>
+              ))}
+            </div>
+          </>
         ) : (
           <div className="text-center py-12 text-muted-foreground">
-            {loading ? "상품을 검색 중입니다..." : "검색할 상품을 입력해주세요"}
+            검색 결과가 없습니다
           </div>
         )}
       </section>
