@@ -33,21 +33,21 @@ serve(async (req) => {
     console.log(`Searching for products: ${keyword}, page: ${page}`);
 
     const response = await fetch(
-      `https://aliexpress-api2.p.rapidapi.com/search?SearchText=${encodeURIComponent(keyword)}&page=${page}`,
+      `https://real-time-amazon-data.p.rapidapi.com/search?query=${encodeURIComponent(keyword)}&page=${page}&country=US`,
       {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': RAPIDAPI_KEY,
-          'X-RapidAPI-Host': 'aliexpress-api2.p.rapidapi.com'
+          'X-RapidAPI-Host': 'real-time-amazon-data.p.rapidapi.com'
         }
       }
     );
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('AliExpress API error:', response.status, errorText);
+      console.error('Amazon API error:', response.status, errorText);
       return new Response(
-        JSON.stringify({ error: 'Failed to fetch products from AliExpress' }),
+        JSON.stringify({ error: 'Failed to fetch products from Amazon' }),
         { status: response.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -55,16 +55,16 @@ serve(async (req) => {
     const data = await response.json();
     console.log('Products fetched successfully');
 
-    // Transform the response to match the expected format
+    // Transform Amazon API response to match expected format
     const transformedData = {
-      items: data.body?.products?.map((product: any, index: number) => ({
-        product_id: product.url?.split('/item/')[1]?.split('.html')[0] || `product-${index}`,
-        product_title: product.title || 'No title',
-        product_price: product.price?.current || 'N/A',
-        product_main_image_url: product.image || '',
-        product_url: product.url || '#',
-        product_star_rating: product.customerReview?.average?.toString() || undefined,
-        soldCount: product.soldCount || 0
+      items: data.data?.products?.map((product: any) => ({
+        product_id: product.asin || product.product_id || '',
+        product_title: product.product_title || 'No title',
+        product_price: product.product_price || 'N/A',
+        product_main_image_url: product.product_photo || product.product_main_image_url || '',
+        product_url: product.product_url || '#',
+        product_star_rating: product.product_star_rating || undefined,
+        product_num_ratings: product.product_num_ratings || 0
       })) || []
     };
 

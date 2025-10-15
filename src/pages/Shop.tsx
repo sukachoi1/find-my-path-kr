@@ -38,7 +38,7 @@ const Shop = () => {
         console.error('Load best products error:', error);
         toast({
           title: "API 구독 필요",
-          description: "RapidAPI에서 AliExpress API를 구독해주세요.",
+          description: "RapidAPI에서 Real-Time Amazon Data API를 구독해주세요.",
           variant: "destructive",
         });
         return;
@@ -47,7 +47,7 @@ const Shop = () => {
       if (data?.error) {
         toast({
           title: "API 오류",
-          description: "RapidAPI에서 AliExpress API2를 구독했는지 확인해주세요.",
+          description: "RapidAPI에서 Real-Time Amazon Data API를 구독했는지 확인해주세요.",
           variant: "destructive",
         });
         return;
@@ -97,7 +97,7 @@ const Shop = () => {
       if (data?.error) {
         toast({
           title: "API 오류",
-          description: "RapidAPI에서 AliExpress API2를 구독했는지 확인해주세요.",
+          description: "RapidAPI에서 Real-Time Amazon Data API를 구독했는지 확인해주세요.",
           variant: "destructive",
         });
         return;
@@ -141,7 +141,7 @@ const Shop = () => {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <ShoppingCart className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">AliExpress 쇼핑몰</h1>
+            <h1 className="text-2xl font-bold">아마존 쇼핑몰</h1>
           </div>
         </div>
       </header>
