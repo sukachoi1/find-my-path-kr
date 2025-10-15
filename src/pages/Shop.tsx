@@ -36,6 +36,20 @@ const Shop = () => {
 
       if (error) {
         console.error('Load best products error:', error);
+        toast({
+          title: "API 구독 필요",
+          description: "RapidAPI에서 AliExpress API를 구독해주세요.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data?.error) {
+        toast({
+          title: "API 오류",
+          description: "RapidAPI에서 AliExpress Unofficial API를 구독했는지 확인해주세요.",
+          variant: "destructive",
+        });
         return;
       }
 
@@ -44,6 +58,11 @@ const Shop = () => {
       }
     } catch (err) {
       console.error('Unexpected error:', err);
+      toast({
+        title: "오류 발생",
+        description: "API 연결에 문제가 있습니다.",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -75,7 +94,16 @@ const Shop = () => {
         return;
       }
 
-      if (data?.items) {
+      if (data?.error) {
+        toast({
+          title: "API 오류",
+          description: "RapidAPI에서 AliExpress Unofficial API를 구독했는지 확인해주세요.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data?.items && data.items.length > 0) {
         setProducts(data.items);
         toast({
           title: "검색 완료",
