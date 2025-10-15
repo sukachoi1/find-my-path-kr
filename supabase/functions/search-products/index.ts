@@ -33,7 +33,7 @@ serve(async (req) => {
     console.log(`Searching Amazon products: ${keyword}, page: ${page}`);
 
     const response = await fetch(
-      `https://real-time-amazon-data.p.rapidapi.com/search?query=${encodeURIComponent(keyword)}&page=${page}&country=US`,
+      `https://real-time-amazon-data.p.rapidapi.com/search?query=${encodeURIComponent(keyword)}&page=${page}&country=KR`,
       {
         method: 'GET',
         headers: {

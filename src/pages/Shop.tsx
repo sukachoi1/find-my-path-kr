@@ -30,7 +30,7 @@ const Shop = () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('search-products', {
-        body: { keyword: "best sellers", page: 1 }
+        body: { keyword: "popular products korea", page: 1 }
       });
 
       if (error) {
@@ -117,7 +117,7 @@ const Shop = () => {
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <ShoppingCart className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">Amazon Shop</h1>
+            <h1 className="text-3xl font-bold text-foreground">아마존 쇼핑</h1>
           </div>
         </div>
 
