@@ -30,7 +30,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Searching for products: ${keyword}, page: ${page}`);
+    console.log(`Searching Amazon products: ${keyword}, page: ${page}`);
 
     const response = await fetch(
       `https://real-time-amazon-data.p.rapidapi.com/search?query=${encodeURIComponent(keyword)}&page=${page}&country=US`,
@@ -53,15 +53,15 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    console.log('Products fetched successfully');
+    console.log('Amazon products fetched successfully');
 
-    // Transform Amazon API response to match expected format
+    // Transform Amazon API response
     const transformedData = {
       items: data.data?.products?.map((product: any) => ({
-        product_id: product.asin || product.product_id || '',
+        product_id: product.asin || '',
         product_title: product.product_title || 'No title',
         product_price: product.product_price || 'N/A',
-        product_main_image_url: product.product_photo || product.product_main_image_url || '',
+        product_main_image_url: product.product_photo || '',
         product_url: product.product_url || '#',
         product_star_rating: product.product_star_rating || undefined,
         product_num_ratings: product.product_num_ratings || 0

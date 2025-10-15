@@ -10,10 +10,10 @@ interface Product {
   product_id: string;
   product_title: string;
   product_price: string;
-  product_original_price?: string;
   product_main_image_url: string;
   product_url: string;
   product_star_rating?: string;
+  product_num_ratings?: number;
 }
 
 const Shop = () => {
@@ -22,7 +22,6 @@ const Shop = () => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  // 첫 화면 로드 시 베스트 상품 자동 표시
   useEffect(() => {
     loadBestProducts();
   }, []);
@@ -35,34 +34,20 @@ const Shop = () => {
       });
 
       if (error) {
-        console.error('Load best products error:', error);
+        console.error('Load error:', error);
         toast({
-          title: "API 구독 필요",
-          description: "RapidAPI에서 Real-Time Amazon Data API를 구독해주세요.",
+          title: "오류",
+          description: "상품을 불러올 수 없습니다.",
           variant: "destructive",
         });
         return;
       }
 
-      if (data?.error) {
-        toast({
-          title: "API 오류",
-          description: "RapidAPI에서 Real-Time Amazon Data API를 구독했는지 확인해주세요.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (data?.items) {
+      if (data?.items && data.items.length > 0) {
         setProducts(data.items);
       }
     } catch (err) {
       console.error('Unexpected error:', err);
-      toast({
-        title: "오류 발생",
-        description: "API 연결에 문제가 있습니다.",
-        variant: "destructive",
-      });
     } finally {
       setLoading(false);
     }
@@ -71,8 +56,8 @@ const Shop = () => {
   const searchProducts = async () => {
     if (!keyword.trim()) {
       toast({
-        title: "검색어를 입력하세요",
-        description: "상품을 검색하려면 키워드를 입력해주세요.",
+        title: "검색어 입력",
+        description: "검색할 상품명을 입력해주세요.",
         variant: "destructive",
       });
       return;
@@ -94,15 +79,6 @@ const Shop = () => {
         return;
       }
 
-      if (data?.error) {
-        toast({
-          title: "API 오류",
-          description: "RapidAPI에서 Real-Time Amazon Data API를 구독했는지 확인해주세요.",
-          variant: "destructive",
-        });
-        return;
-      }
-
       if (data?.items && data.items.length > 0) {
         setProducts(data.items);
         toast({
@@ -119,8 +95,8 @@ const Shop = () => {
     } catch (err) {
       console.error('Unexpected error:', err);
       toast({
-        title: "오류 발생",
-        description: "예상치 못한 오류가 발생했습니다.",
+        title: "오류",
+        description: "검색 중 문제가 발생했습니다.",
         variant: "destructive",
       });
     } finally {
@@ -135,88 +111,80 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ShoppingCart className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">아마존 쇼핑몰</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <ShoppingCart className="w-8 h-8 text-primary" />
+            <h1 className="text-3xl font-bold text-foreground">Amazon Shop</h1>
           </div>
         </div>
-      </header>
 
-      {/* Search Section */}
-      <section className="container py-12">
-        <div className="max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl font-bold text-center mb-8">상품 검색</h2>
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto mb-12">
           <div className="flex gap-2">
             <Input
-              placeholder="검색할 상품을 입력하세요 (예: phone, laptop, dress)"
+              type="text"
+              placeholder="상품 검색..."
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyPress={handleKeyPress}
               className="flex-1"
             />
             <Button onClick={searchProducts} disabled={loading}>
-              <Search className="h-4 w-4 mr-2" />
-              {loading ? "검색 중..." : "검색"}
+              <Search className="w-4 h-4 mr-2" />
+              검색
             </Button>
           </div>
         </div>
-      </section>
 
-      {/* Products Grid */}
-      <section className="container pb-12">
-        {loading && products.length === 0 ? (
-          <div className="text-center py-12 text-muted-foreground">
-            베스트 상품을 불러오는 중...
+        {/* Products Grid */}
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">상품을 검색하는 중...</p>
           </div>
         ) : products.length > 0 ? (
-          <>
-            <h2 className="text-2xl font-bold mb-6">
-              {keyword ? `"${keyword}" 검색 결과` : "베스트 상품"}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <Card key={product.product_id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <a href={product.product_url} target="_blank" rel="noopener noreferrer" className="block">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <Card key={product.product_id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <a href={product.product_url} target="_blank" rel="noopener noreferrer">
+                  <div className="aspect-square relative bg-gray-100">
                     <img
                       src={product.product_main_image_url}
                       alt={product.product_title}
-                      className="w-full h-64 object-cover hover:scale-105 transition-transform"
+                      className="w-full h-full object-contain p-4"
                     />
-                    <CardContent className="p-4 space-y-2">
-                      <h3 className="font-semibold line-clamp-2 text-sm">
-                        {product.product_title}
-                      </h3>
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl font-bold text-primary">
-                          ${product.product_price}
-                        </span>
-                        {product.product_original_price && (
-                          <span className="text-sm text-muted-foreground line-through">
-                            ${product.product_original_price}
-                          </span>
-                        )}
-                      </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-sm line-clamp-2 mb-2 min-h-[2.5rem]">
+                      {product.product_title}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <p className="text-lg font-bold text-primary">
+                        {product.product_price}
+                      </p>
                       {product.product_star_rating && (
-                        <div className="text-sm text-muted-foreground">
-                          ⭐ {product.product_star_rating}
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <span>⭐ {product.product_star_rating}</span>
+                          {product.product_num_ratings && (
+                            <span>({product.product_num_ratings})</span>
+                          )}
                         </div>
                       )}
-                    </CardContent>
-                  </a>
-                </Card>
-              ))}
-            </div>
-          </>
+                    </div>
+                  </CardContent>
+                </a>
+              </Card>
+            ))}
+          </div>
         ) : (
-          <div className="text-center py-12 text-muted-foreground">
-            검색 결과가 없습니다
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">검색 결과가 없습니다.</p>
           </div>
         )}
-      </section>
+      </div>
     </div>
   );
 };
