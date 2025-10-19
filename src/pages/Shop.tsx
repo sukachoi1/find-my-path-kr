@@ -30,7 +30,7 @@ const Shop = () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('search-products', {
-        body: { keyword: "exclusive US brands american made products", page: 1 }
+        body: { keyword: "vitamins supplements health beauty American brands", page: 1 }
       });
 
       if (error) {
