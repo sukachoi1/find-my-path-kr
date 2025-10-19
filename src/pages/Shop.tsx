@@ -30,7 +30,7 @@ const Shop = () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('search-products', {
-        body: { keyword: "premium designer fashion kids toys", page: 1 }
+        body: { keyword: "exclusive US brands american made products", page: 1 }
       });
 
       if (error) {
